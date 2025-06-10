@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Physics & Acoustics Calculators</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive calculators for Ohm's Law, resonance, room acoustics, amplifier power, crossovers, and voltage dividers.">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Audio Physics & Acoustics Calculators</h1>
+    <p>
+      Explore key concepts in audio engineering and acoustics.<br>
+      Calculate Ohm’s law, resonance, room effects, amplifier power, filters, and more!
+    </p>
+  </header>
+  <main>
+    <section class="calculator" id="ohm">
+      <h2>Ohm’s Law</h2>
+      <div class="inputs">
+        <label>Voltage (V): <input type="number" id="ohm_v" step="any"></label>
+        <label>Current (I, A): <input type="number" id="ohm_i" step="any"></label>
+        <label>Resistance (R, Ω): <input type="number" id="ohm_r" step="any"></label>
+      </div>
+      <button onclick="calcOhm()">Calculate</button>
+      <div class="result" id="ohm_result"></div>
+    </section>
+
+    <section class="calculator" id="resonance">
+      <h2>Resonance Frequency (LC/RC Circuit)</h2>
+      <div class="inputs">
+        <label>Inductance (L, mH): <input type="number" id="res_l" step="any"></label>
+        <label>Capacitance (C, μF): <input type="number" id="res_c" step="any"></label>
+      </div>
+      <button onclick="calcResonance()">Calculate</button>
+      <div class="result" id="res_result"></div>
+    </section>
+
+    <section class="calculator" id="roomsize">
+      <h2>Room Mode / Resonance</h2>
+      <div class="inputs">
+        <label>Room Length (m): <input type="number" id="room_l" step="any"></label>
+        <label>Room Width (m): <input type="number" id="room_w" step="any"></label>
+        <label>Room Height (m): <input type="number" id="room_h" step="any"></label>
+      </div>
+      <button onclick="calcRoomModes()">Calculate</button>
+      <div class="result" id="room_result"></div>
+    </section>
+
+    <section class="calculator" id="distance">
+      <h2>Sound Level vs Distance</h2>
+      <div class="inputs">
+        <label>Initial Distance (m): <input type="number" id="dist_d1" step="any" value="1"></label>
+        <label>Initial SPL (dB): <input type="number" id="dist_spl1" step="any" value="90"></label>
+        <label>Target Distance (m): <input type="number" id="dist_d2" step="any"></label>
+      </div>
+      <button onclick="calcDistance()">Calculate</button>
+      <div class="result" id="dist_result"></div>
+    </section>
+
+    <section class="calculator" id="amp">
+      <h2>Amplifier Power</h2>
+      <div class="inputs">
+        <label>Voltage (Vrms): <input type="number" id="amp_v" step="any"></label>
+        <label>Load Impedance (Ω): <input type="number" id="amp_r" step="any"></label>
+      </div>
+      <button onclick="calcAmp()">Calculate</button>
+      <div class="result" id="amp_result"></div>
+    </section>
+
+    <section class="calculator" id="crossover">
+      <h2>Crossover Calculator (Frequency Cutters)</h2>
+      <div class="inputs">
+        <label>Type:
+          <select id="xo_type">
+            <option value="lowpass">Low-pass</option>
+            <option value="highpass">High-pass</option>
+          </select>
+        </label>
+        <label>Order:
+          <select id="xo_order">
+            <option value="1">1st (6 dB/oct)</option>
+            <option value="2">2nd (12 dB/oct)</option>
+            <option value="3">3rd (18 dB/oct)</option>
+            <option value="4">4th (24 dB/oct)</option>
+          </select>
+        </label>
+        <label>Frequency (Hz): <input type="number" id="xo_freq" step="any"></label>
+        <label>Impedance (Ω): <input type="number" id="xo_z" step="any"></label>
+      </div>
+      <button onclick="calcXO()">Calculate</button>
+      <div class="result" id="xo_result"></div>
+    </section>
+
+    <section class="calculator" id="divider">
+      <h2>Voltage Divider</h2>
+      <div class="inputs">
+        <label>Input Voltage (V): <input type="number" id="div_vin" step="any"></label>
+        <label>R1 (Ω): <input type="number" id="div_r1" step="any"></label>
+        <label>R2 (Ω): <input type="number" id="div_r2" step="any"></label>
+      </div>
+      <button onclick="calcDivider()">Calculate</button>
+      <div class="result" id="div_result"></div>
+    </section>
+  </main>
+  <footer>
+    <p>
+      &copy; 2025 Acoustic & Audio Physics | <a href="https://github.com/TurboSosiska304" target="_blank">GitHub</a>
+    </p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
