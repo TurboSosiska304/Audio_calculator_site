@@ -7,9 +7,11 @@ function setLang(lang) {
 
   if (lang === 'ru' && window.RU_LANG) {
     const RU = window.RU_LANG;
-    // Header
     document.getElementById("title").innerText = RU.title;
     document.getElementById("subtitle").innerText = RU.subtitle;
+    // Tabs
+    document.getElementById("tab_calcs_label").innerText = RU.tab_calcs_label;
+    document.getElementById("tab_formats_label").innerText = RU.tab_formats_label;
     // Ohm
     document.getElementById("ohm_h2").innerText = RU.ohm_h2;
     document.getElementById("ohm_v_label").innerText = RU.ohm_v_label;
@@ -51,16 +53,52 @@ function setLang(lang) {
     document.getElementById("div_r1_label").innerText = RU.div_r1_label;
     document.getElementById("div_r2_label").innerText = RU.div_r2_label;
     document.getElementById("div_btn").innerText = RU.div_btn;
+    // Formats Tab
+    document.getElementById("formats_h2").innerText = RU.formats_h2;
+    document.getElementById("formats_intro").innerText = RU.formats_intro;
+    document.getElementById("fmt_name").innerText = RU.fmt_name;
+    document.getElementById("fmt_type").innerText = RU.fmt_type;
+    document.getElementById("fmt_subcat").innerText = RU.fmt_subcat;
+    document.getElementById("fmt_size").innerText = RU.fmt_size;
+    document.getElementById("fmt_note").innerText = RU.fmt_note;
+    // Table body fields
+    document.getElementById("fmt_lossy").innerText = RU.fmt_lossy;
+    document.getElementById("fmt_lossy2").innerText = RU.fmt_lossy2;
+    document.getElementById("fmt_lossy3").innerText = RU.fmt_lossy3;
+    document.getElementById("fmt_lossy4").innerText = RU.fmt_lossy4;
+    document.getElementById("fmt_lossless").innerText = RU.fmt_lossless;
+    document.getElementById("fmt_lossless2").innerText = RU.fmt_lossless2;
+    document.getElementById("fmt_lossless3").innerText = RU.fmt_lossless3;
+    document.getElementById("fmt_lossless4").innerText = RU.fmt_lossless4;
+    document.getElementById("fmt_mp3note").innerText = RU.fmt_mp3note;
+    document.getElementById("fmt_aacnote").innerText = RU.fmt_aacnote;
+    document.getElementById("fmt_oggvorbisnote").innerText = RU.fmt_oggvorbisnote;
+    document.getElementById("fmt_wavnote").innerText = RU.fmt_wavnote;
+    document.getElementById("fmt_flacnote").innerText = RU.fmt_flacnote;
+    document.getElementById("fmt_alacnote").innerText = RU.fmt_alacnote;
+    document.getElementById("fmt_opusnote").innerText = RU.fmt_opusnote;
+    document.getElementById("fmt_aiffnote").innerText = RU.fmt_aiffnote;
+    document.getElementById("formats_footer").innerHTML = RU.formats_footer;
   } else {
-    // Defaults are English in HTML
+    // Reset to English (reload to default content)
     location.reload();
   }
+}
+
+// Tabs
+function showTab(tab) {
+  document.getElementById('tab-calcs').classList.toggle('active', tab === 'calcs');
+  document.getElementById('tab-formats').classList.toggle('active', tab === 'formats');
+  document.getElementById('section-calcs').style.display = (tab === 'calcs') ? '' : 'none';
+  document.getElementById('section-formats').style.display = (tab === 'formats') ? '' : 'none';
 }
 
 // Helper for string formatting
 function fmt(str, ...args) {
   return str.replace(/\{(\d+)\}/g, (_, i) => args[i] !== undefined ? args[i] : "");
 }
+
+// --- Calculators code unchanged below (same as previous) ---
 
 // Ohm's Law Calculator
 function calcOhm() {

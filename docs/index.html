@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Audio Physics & Acoustics Calculators</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Interactive calculators for Ohm's Law, resonance, room acoustics, amplifier power, crossovers, and voltage dividers.">
+  <meta name="description" content="Interactive calculators for Ohm's Law, resonance, room acoustics, amplifier power, crossovers, voltage dividers, and audio file formats.">
   <link href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -19,95 +19,177 @@
       Explore key concepts in audio engineering and acoustics.<br>
       Calculate Ohm’s law, resonance, room effects, amplifier power, filters, and more!
     </p>
+    <nav class="tabs">
+      <button id="tab-calcs" class="tab-btn active" onclick="showTab('calcs')"><span id="tab_calcs_label">Calculators</span></button>
+      <button id="tab-formats" class="tab-btn" onclick="showTab('formats')"><span id="tab_formats_label">Audio Formats</span></button>
+    </nav>
   </header>
   <main>
-    <section class="calculator" id="ohm">
-      <h2 id="ohm_h2">Ohm’s Law</h2>
-      <div class="inputs">
-        <label id="ohm_v_label">Voltage (V): <input type="number" id="ohm_v" step="any"></label>
-        <label id="ohm_i_label">Current (I, A): <input type="number" id="ohm_i" step="any"></label>
-        <label id="ohm_r_label">Resistance (R, Ω): <input type="number" id="ohm_r" step="any"></label>
-      </div>
-      <button id="ohm_btn" onclick="calcOhm()">Calculate</button>
-      <div class="result" id="ohm_result"></div>
-    </section>
-
-    <section class="calculator" id="resonance">
-      <h2 id="res_h2">Resonance Frequency (LC/RC Circuit)</h2>
-      <div class="inputs">
-        <label id="res_l_label">Inductance (L, mH): <input type="number" id="res_l" step="any"></label>
-        <label id="res_c_label">Capacitance (C, μF): <input type="number" id="res_c" step="any"></label>
-      </div>
-      <button id="res_btn" onclick="calcResonance()">Calculate</button>
-      <div class="result" id="res_result"></div>
-    </section>
-
-    <section class="calculator" id="roomsize">
-      <h2 id="room_h2">Room Mode / Resonance</h2>
-      <div class="inputs">
-        <label id="room_l_label">Room Length (m): <input type="number" id="room_l" step="any"></label>
-        <label id="room_w_label">Room Width (m): <input type="number" id="room_w" step="any"></label>
-        <label id="room_h_label">Room Height (m): <input type="number" id="room_h" step="any"></label>
-      </div>
-      <button id="room_btn" onclick="calcRoomModes()">Calculate</button>
-      <div class="result" id="room_result"></div>
-    </section>
-
-    <section class="calculator" id="distance">
-      <h2 id="dist_h2">Sound Level vs Distance</h2>
-      <div class="inputs">
-        <label id="dist_d1_label">Initial Distance (m): <input type="number" id="dist_d1" step="any" value="1"></label>
-        <label id="dist_spl1_label">Initial SPL (dB): <input type="number" id="dist_spl1" step="any" value="90"></label>
-        <label id="dist_d2_label">Target Distance (m): <input type="number" id="dist_d2" step="any"></label>
-      </div>
-      <button id="dist_btn" onclick="calcDistance()">Calculate</button>
-      <div class="result" id="dist_result"></div>
-    </section>
-
-    <section class="calculator" id="amp">
-      <h2 id="amp_h2">Amplifier Power</h2>
-      <div class="inputs">
-        <label id="amp_v_label">Voltage (Vrms): <input type="number" id="amp_v" step="any"></label>
-        <label id="amp_r_label">Load Impedance (Ω): <input type="number" id="amp_r" step="any"></label>
-      </div>
-      <button id="amp_btn" onclick="calcAmp()">Calculate</button>
-      <div class="result" id="amp_result"></div>
-    </section>
-
-    <section class="calculator" id="crossover">
-      <h2 id="xo_h2">Crossover Calculator (Frequency Cutters)</h2>
-      <div class="inputs">
-        <label id="xo_type_label">Type:
-          <select id="xo_type">
-            <option value="lowpass">Low-pass</option>
-            <option value="highpass">High-pass</option>
-          </select>
-        </label>
-        <label id="xo_order_label">Order:
-          <select id="xo_order">
-            <option value="1">1st (6 dB/oct)</option>
-            <option value="2">2nd (12 dB/oct)</option>
-            <option value="3">3rd (18 dB/oct)</option>
-            <option value="4">4th (24 dB/oct)</option>
-          </select>
-        </label>
-        <label id="xo_freq_label">Frequency (Hz): <input type="number" id="xo_freq" step="any"></label>
-        <label id="xo_z_label">Impedance (Ω): <input type="number" id="xo_z" step="any"></label>
-      </div>
-      <button id="xo_btn" onclick="calcXO()">Calculate</button>
-      <div class="result" id="xo_result"></div>
-    </section>
-
-    <section class="calculator" id="divider">
-      <h2 id="div_h2">Voltage Divider</h2>
-      <div class="inputs">
-        <label id="div_vin_label">Input Voltage (V): <input type="number" id="div_vin" step="any"></label>
-        <label id="div_r1_label">R1 (Ω): <input type="number" id="div_r1" step="any"></label>
-        <label id="div_r2_label">R2 (Ω): <input type="number" id="div_r2" step="any"></label>
-      </div>
-      <button id="div_btn" onclick="calcDivider()">Calculate</button>
-      <div class="result" id="div_result"></div>
-    </section>
+    <!-- Calculators Section -->
+    <div id="section-calcs">
+      <section class="calculator" id="ohm">
+        <h2 id="ohm_h2">Ohm’s Law</h2>
+        <div class="inputs">
+          <label id="ohm_v_label">Voltage (V): <input type="number" id="ohm_v" step="any"></label>
+          <label id="ohm_i_label">Current (I, A): <input type="number" id="ohm_i" step="any"></label>
+          <label id="ohm_r_label">Resistance (R, Ω): <input type="number" id="ohm_r" step="any"></label>
+        </div>
+        <button id="ohm_btn" onclick="calcOhm()">Calculate</button>
+        <div class="result" id="ohm_result"></div>
+      </section>
+      <section class="calculator" id="resonance">
+        <h2 id="res_h2">Resonance Frequency (LC/RC Circuit)</h2>
+        <div class="inputs">
+          <label id="res_l_label">Inductance (L, mH): <input type="number" id="res_l" step="any"></label>
+          <label id="res_c_label">Capacitance (C, μF): <input type="number" id="res_c" step="any"></label>
+        </div>
+        <button id="res_btn" onclick="calcResonance()">Calculate</button>
+        <div class="result" id="res_result"></div>
+      </section>
+      <section class="calculator" id="roomsize">
+        <h2 id="room_h2">Room Mode / Resonance</h2>
+        <div class="inputs">
+          <label id="room_l_label">Room Length (m): <input type="number" id="room_l" step="any"></label>
+          <label id="room_w_label">Room Width (m): <input type="number" id="room_w" step="any"></label>
+          <label id="room_h_label">Room Height (m): <input type="number" id="room_h" step="any"></label>
+        </div>
+        <button id="room_btn" onclick="calcRoomModes()">Calculate</button>
+        <div class="result" id="room_result"></div>
+      </section>
+      <section class="calculator" id="distance">
+        <h2 id="dist_h2">Sound Level vs Distance</h2>
+        <div class="inputs">
+          <label id="dist_d1_label">Initial Distance (m): <input type="number" id="dist_d1" step="any" value="1"></label>
+          <label id="dist_spl1_label">Initial SPL (dB): <input type="number" id="dist_spl1" step="any" value="90"></label>
+          <label id="dist_d2_label">Target Distance (m): <input type="number" id="dist_d2" step="any"></label>
+        </div>
+        <button id="dist_btn" onclick="calcDistance()">Calculate</button>
+        <div class="result" id="dist_result"></div>
+      </section>
+      <section class="calculator" id="amp">
+        <h2 id="amp_h2">Amplifier Power</h2>
+        <div class="inputs">
+          <label id="amp_v_label">Voltage (Vrms): <input type="number" id="amp_v" step="any"></label>
+          <label id="amp_r_label">Load Impedance (Ω): <input type="number" id="amp_r" step="any"></label>
+        </div>
+        <button id="amp_btn" onclick="calcAmp()">Calculate</button>
+        <div class="result" id="amp_result"></div>
+      </section>
+      <section class="calculator" id="crossover">
+        <h2 id="xo_h2">Crossover Calculator (Frequency Cutters)</h2>
+        <div class="inputs">
+          <label id="xo_type_label">Type:
+            <select id="xo_type">
+              <option value="lowpass">Low-pass</option>
+              <option value="highpass">High-pass</option>
+            </select>
+          </label>
+          <label id="xo_order_label">Order:
+            <select id="xo_order">
+              <option value="1">1st (6 dB/oct)</option>
+              <option value="2">2nd (12 dB/oct)</option>
+              <option value="3">3rd (18 dB/oct)</option>
+              <option value="4">4th (24 dB/oct)</option>
+            </select>
+          </label>
+          <label id="xo_freq_label">Frequency (Hz): <input type="number" id="xo_freq" step="any"></label>
+          <label id="xo_z_label">Impedance (Ω): <input type="number" id="xo_z" step="any"></label>
+        </div>
+        <button id="xo_btn" onclick="calcXO()">Calculate</button>
+        <div class="result" id="xo_result"></div>
+      </section>
+      <section class="calculator" id="divider">
+        <h2 id="div_h2">Voltage Divider</h2>
+        <div class="inputs">
+          <label id="div_vin_label">Input Voltage (V): <input type="number" id="div_vin" step="any"></label>
+          <label id="div_r1_label">R1 (Ω): <input type="number" id="div_r1" step="any"></label>
+          <label id="div_r2_label">R2 (Ω): <input type="number" id="div_r2" step="any"></label>
+        </div>
+        <button id="div_btn" onclick="calcDivider()">Calculate</button>
+        <div class="result" id="div_result"></div>
+      </section>
+    </div>
+    <!-- Audio Formats Section -->
+    <div id="section-formats" style="display:none">
+      <section class="calculator audio-formats">
+        <h2 id="formats_h2">Audio File Formats</h2>
+        <div id="formats_intro">
+          Here are the most common audio file formats, their approximate file sizes, and their categories.
+        </div>
+        <table class="formats-table">
+          <thead>
+            <tr>
+              <th id="fmt_name">Format</th>
+              <th id="fmt_type">Type</th>
+              <th id="fmt_subcat">Subcategory</th>
+              <th id="fmt_size">Approx. Size (1 min, stereo)</th>
+              <th id="fmt_note">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MP3</td>
+              <td id="fmt_lossy">Lossy</td>
+              <td>CBR, VBR</td>
+              <td>0.7–1.5 MB (128–320 kbps)</td>
+              <td id="fmt_mp3note">Most popular for music download/streaming</td>
+            </tr>
+            <tr>
+              <td>AAC</td>
+              <td id="fmt_lossy2">Lossy</td>
+              <td>CBR, VBR</td>
+              <td>0.7–1.2 MB (128–256 kbps)</td>
+              <td id="fmt_aacnote">Default for iTunes, YouTube, Apple Music</td>
+            </tr>
+            <tr>
+              <td>OGG Vorbis</td>
+              <td id="fmt_lossy3">Lossy</td>
+              <td>CBR, VBR</td>
+              <td>~1 MB (160 kbps)</td>
+              <td id="fmt_oggvorbisnote">Open, free, used in games/Spotify</td>
+            </tr>
+            <tr>
+              <td>WAV</td>
+              <td id="fmt_lossless">Lossless</td>
+              <td>Uncompressed PCM</td>
+              <td>~10.1 MB (16-bit/44.1 kHz)</td>
+              <td id="fmt_wavnote">Studio/archival, very large files</td>
+            </tr>
+            <tr>
+              <td>FLAC</td>
+              <td id="fmt_lossless2">Lossless</td>
+              <td>Compressed</td>
+              <td>~5–7 MB</td>
+              <td id="fmt_flacnote">Popular for high-quality music</td>
+            </tr>
+            <tr>
+              <td>ALAC</td>
+              <td id="fmt_lossless3">Lossless</td>
+              <td>Compressed</td>
+              <td>~5–7 MB</td>
+              <td id="fmt_alacnote">Apple’s lossless, for iTunes/Apple devices</td>
+            </tr>
+            <tr>
+              <td>Opus</td>
+              <td id="fmt_lossy4">Lossy</td>
+              <td>VBR</td>
+              <td>~0.5–1 MB (48–128 kbps)</td>
+              <td id="fmt_opusnote">Modern, low-latency (VoIP, Discord, streaming)</td>
+            </tr>
+            <tr>
+              <td>AIFF</td>
+              <td id="fmt_lossless4">Lossless</td>
+              <td>Uncompressed PCM</td>
+              <td>~10.1 MB (16-bit/44.1 kHz)</td>
+              <td id="fmt_aiffnote">Apple’s uncompressed, pro audio</td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="formats_footer">
+          <strong>Tip:</strong> Lossy formats are much smaller, but lose some quality. Lossless preserve all original data, but are much larger.
+        </div>
+      </section>
+    </div>
   </main>
   <footer>
     <p>

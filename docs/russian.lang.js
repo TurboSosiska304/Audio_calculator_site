@@ -1,6 +1,9 @@
 window.RU_LANG = {
   title: "Акустика и аудио-физика: Калькуляторы",
   subtitle: "Изучайте основы аудио и акустики. Рассчитайте закон Ома, резонанс, влияние комнаты, мощность усилителя, фильтры и делитель напряжения.",
+  tab_calcs_label: "Калькуляторы",
+  tab_formats_label: "Аудио форматы",
+  // Calculators
   ohm_h2: "Закон Ома",
   ohm_v_label: "Напряжение (В):",
   ohm_i_label: "Ток (I, А):",
@@ -35,7 +38,6 @@ window.RU_LANG = {
   div_r1_label: "R1 (Ом):",
   div_r2_label: "R2 (Ом):",
   div_btn: "Вычислить",
-
   // Results & messages (used in script.js for Russian)
   ohm_need: "Введите любые два значения.",
   ohm_r: "Сопротивление R = {0} Ом",
@@ -55,5 +57,30 @@ window.RU_LANG = {
   xo_2nd: "2-й порядок:<br>C = {0} мкФ<br>L = {1} мГн",
   xo_adv: "Порядок {0}: Используйте активные или сложные пассивные схемы.<br><a href=\"https://www.diyaudioandvideo.com/Calculator/SpeakerCrossover/\" target=\"_blank\">См. расширенный калькулятор</a>",
   div_need: "Введите Vin, R1, R2.",
-  div_result: "Vвыход = {0} В"
+  div_result: "Vвыход = {0} В",
+  // Audio Formats tab
+  formats_h2: "Аудио форматы",
+  formats_intro: "Здесь приведены наиболее распространённые аудиоформаты, их примерный размер и категория.",
+  fmt_name: "Формат",
+  fmt_type: "Тип",
+  fmt_subcat: "Подкатегория",
+  fmt_size: "Примерный размер (1 минута, стерео)",
+  fmt_note: "Описание",
+  fmt_lossy: "С потерями",
+  fmt_lossy2: "С потерями",
+  fmt_lossy3: "С потерями",
+  fmt_lossy4: "С потерями",
+  fmt_lossless: "Без потерь",
+  fmt_lossless2: "Без потерь",
+  fmt_lossless3: "Без потерь",
+  fmt_lossless4: "Без потерь",
+  fmt_mp3note: "Самый популярный для музыки и стриминга",
+  fmt_aacnote: "По умолчанию для iTunes, YouTube, Apple Music",
+  fmt_oggvorbisnote: "Открытый, бесплатный, используется в играх/Spotify",
+  fmt_wavnote: "Студийный/архивный, очень большие файлы",
+  fmt_flacnote: "Популярен для качественной музыки",
+  fmt_alacnote: "Apple lossless, для iTunes и Apple устройств",
+  fmt_opusnote: "Современный, низкая задержка (VoIP, Discord, стриминг)",
+  fmt_aiffnote: "Apple несжатый, профи аудио",
+  formats_footer: "<strong>Совет:</strong> Форматы с потерями намного меньше, но теряют качество. Форматы без потерь сохраняют оригинальные данные, но занимают больше места."
 };
