@@ -1,15 +1,27 @@
+:root {
+  --bg: #181c22;
+  --panel: #232834;
+  --text: #e6eaf0;
+  --accent: #42a5f5;
+  --accent2: #1e88e5;
+  --code-bg: #212936;
+  --input-bg: #252c39;
+  --input-border: #364052;
+  --result-bg: #1b232c;
+}
 body {
   font-family: 'Inter', Arial, sans-serif;
-  background: #f7f9fb;
+  background: var(--bg);
   margin: 0;
-  color: #222;
+  color: var(--text);
 }
 header {
-  background: linear-gradient(90deg, #1976d2 20%, #89f7fe 100%);
+  background: linear-gradient(90deg, #232834 20%, #1e88e5cc 100%);
   color: #fff;
   padding: 2rem 1rem 1.5rem 1rem;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(30,60,90,0.1);
+  box-shadow: 0 2px 8px #0008;
+  position: relative;
 }
 header h1 {
   margin: 0 0 0.7rem 0;
@@ -21,6 +33,28 @@ header p {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 400;
+}
+.language-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+}
+.language-toggle button {
+  background: var(--panel);
+  color: var(--accent);
+  border: 1px solid var(--accent2);
+  border-radius: 0.4em;
+  padding: 0.23em 1.1em;
+  font-size: 1rem;
+  margin-left: 0.5em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  outline: none;
+}
+.language-toggle button.active,
+.language-toggle button:focus {
+  background: var(--accent2);
+  color: #fff;
 }
 
 main {
@@ -34,9 +68,9 @@ main {
 }
 
 .calculator {
-  background: #fff;
+  background: var(--panel);
   border-radius: 1.2rem;
-  box-shadow: 0 2px 12px rgba(30,60,90,0.08);
+  box-shadow: 0 2px 12px #1119;
   padding: 1.4rem 1.2rem;
   min-width: 300px;
   flex: 1 1 350px;
@@ -44,12 +78,12 @@ main {
   transition: box-shadow 0.2s;
 }
 .calculator:hover {
-  box-shadow: 0 4px 20px rgba(40,80,120,0.15);
+  box-shadow: 0 4px 20px #000b;
 }
 .calculator h2 {
   margin-top: 0;
   font-size: 1.3rem;
-  color: #1976d2;
+  color: var(--accent);
   margin-bottom: 1.1rem;
 }
 .inputs {
@@ -65,16 +99,18 @@ main {
   font-size: 1rem;
 }
 .inputs input, .inputs select {
-  border: 1px solid #d2e0ef;
+  border: 1px solid var(--input-border);
   border-radius: 0.4rem;
   padding: 0.3rem 0.6rem;
   font-size: 1rem;
   margin-left: 0.5rem;
+  background: var(--input-bg);
+  color: var(--text);
   width: 8em;
   box-sizing: border-box;
 }
 button {
-  background: #1976d2;
+  background: var(--accent2);
   color: #fff;
   border: none;
   padding: 0.55rem 1.2rem;
@@ -85,12 +121,12 @@ button {
   transition: background 0.15s;
 }
 button:hover {
-  background: #135bb0;
+  background: var(--accent);
 }
 .result {
   font-size: 1.08rem;
-  background: #e3f2fd;
-  color: #17487a;
+  background: var(--result-bg);
+  color: var(--accent);
   border-radius: 0.5rem;
   padding: 0.7rem;
   min-height: 1.4em;
