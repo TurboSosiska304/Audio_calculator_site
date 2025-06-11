@@ -121,6 +121,7 @@
             <tr>
               <th id="fmt_name">Format</th>
               <th id="fmt_type">Type</th>
+              <th id="fmt_pcm">PCM/Non-PCM</th>
               <th id="fmt_subcat">Subcategory</th>
               <th id="fmt_size">Approx. Size (1 min, stereo)</th>
               <th id="fmt_note">Notes</th>
@@ -130,6 +131,7 @@
             <tr>
               <td>MP3</td>
               <td id="fmt_lossy">Lossy</td>
+              <td>PCM</td>
               <td>CBR, VBR</td>
               <td>0.7–1.5 MB (128–320 kbps)</td>
               <td id="fmt_mp3note">Most popular for music download/streaming</td>
@@ -137,6 +139,7 @@
             <tr>
               <td>AAC</td>
               <td id="fmt_lossy2">Lossy</td>
+              <td>PCM</td>
               <td>CBR, VBR</td>
               <td>0.7–1.2 MB (128–256 kbps)</td>
               <td id="fmt_aacnote">Default for iTunes, YouTube, Apple Music</td>
@@ -144,6 +147,7 @@
             <tr>
               <td>OGG Vorbis</td>
               <td id="fmt_lossy3">Lossy</td>
+              <td>PCM</td>
               <td>CBR, VBR</td>
               <td>~1 MB (160 kbps)</td>
               <td id="fmt_oggvorbisnote">Open, free, used in games/Spotify</td>
@@ -151,6 +155,7 @@
             <tr>
               <td>WAV</td>
               <td id="fmt_lossless">Lossless</td>
+              <td>PCM</td>
               <td>Uncompressed PCM</td>
               <td>~10.1 MB (16-bit/44.1 kHz)</td>
               <td id="fmt_wavnote">Studio/archival, very large files</td>
@@ -158,6 +163,7 @@
             <tr>
               <td>FLAC</td>
               <td id="fmt_lossless2">Lossless</td>
+              <td>PCM</td>
               <td>Compressed</td>
               <td>~5–7 MB</td>
               <td id="fmt_flacnote">Popular for high-quality music</td>
@@ -165,6 +171,7 @@
             <tr>
               <td>ALAC</td>
               <td id="fmt_lossless3">Lossless</td>
+              <td>PCM</td>
               <td>Compressed</td>
               <td>~5–7 MB</td>
               <td id="fmt_alacnote">Apple’s lossless, for iTunes/Apple devices</td>
@@ -172,6 +179,7 @@
             <tr>
               <td>Opus</td>
               <td id="fmt_lossy4">Lossy</td>
+              <td>PCM</td>
               <td>VBR</td>
               <td>~0.5–1 MB (48–128 kbps)</td>
               <td id="fmt_opusnote">Modern, low-latency (VoIP, Discord, streaming)</td>
@@ -179,9 +187,26 @@
             <tr>
               <td>AIFF</td>
               <td id="fmt_lossless4">Lossless</td>
+              <td>PCM</td>
               <td>Uncompressed PCM</td>
               <td>~10.1 MB (16-bit/44.1 kHz)</td>
               <td id="fmt_aiffnote">Apple’s uncompressed, pro audio</td>
+            </tr>
+            <tr>
+              <td>DSD</td>
+              <td id="fmt_lossless5">Lossless</td>
+              <td>Non-PCM</td>
+              <td>1-bit, high sample rate</td>
+              <td>~20–40 MB (DSD64, 2.8 MHz)</td>
+              <td id="fmt_dsdnote">High-resolution audio, SACD, niche</td>
+            </tr>
+            <tr>
+              <td>DSF</td>
+              <td id="fmt_lossless6">Lossless</td>
+              <td>Non-PCM</td>
+              <td>1-bit, high sample rate</td>
+              <td>~20–40 MB (DSD64, 2.8 MHz)</td>
+              <td id="fmt_dsfnote">DSD in file format, high-end audio</td>
             </tr>
           </tbody>
         </table>
@@ -193,7 +218,7 @@
   </main>
   <footer>
     <p>
-      &copy; 2025 Acoustic & Audio Physics | <a href="https://github.com/TurboSosiska304" target="_blank">GitHub</a>
+      © 2025 Acoustic & Audio Physics | <a href="https://github.com/TurboSosiska304" target="_blank">GitHub</a>
     </p>
   </footer>
   <script src="russian.lang.js"></script>

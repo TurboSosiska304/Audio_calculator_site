@@ -1,15 +1,15 @@
 :root {
-  --bg: #181c22;
-  --panel: #232834;
-  --text: #e6eaf0;
-  --accent: #42a5f5;
-  --accent2: #1e88e5;
-  --code-bg: #212936;
-  --input-bg: #252c39;
-  --input-border: #364052;
-  --result-bg: #1b232c;
-  --tab-bg: #232834;
-  --tab-active: #1976d2;
+  --bg: #1a1d26;
+  --panel: #252b38;
+  --text: #e8ecef;
+  --accent: #4a90e2;
+  --accent2: #357abd;
+  --code-bg: #2a303e;
+  --input-bg: #2e3442;
+  --input-border: #3c4659;
+  --result-bg: #1f2632;
+  --tab-bg: #252b38;
+  --tab-active: #1a73e8;
 }
 body {
   font-family: 'Inter', Arial, sans-serif;
@@ -18,45 +18,51 @@ body {
   color: var(--text);
 }
 header {
-  background: linear-gradient(90deg, #232834 20%, #1e88e5cc 100%);
-  color: #fff;
-  padding: 2rem 1rem 1.5rem 1rem;
+  background: linear-gradient(90deg, #252b38 10%, #1a73e8cc 100%);
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 2px solid var(--accent2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   text-align: center;
-  box-shadow: 0 2px 8px #0008;
-  position: relative;
 }
 header h1 {
+  font-size: 2.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   margin: 0 0 0.7rem 0;
-  font-size: 2.4rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
 }
 header p {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 700px;
+  margin: 0 auto;
 }
 .language-toggle {
   position: absolute;
-  top: 1rem;
-  right: 2rem;
+  top: 0.5rem;
+  right: 1rem;
 }
 .language-toggle button {
   background: var(--panel);
   color: var(--accent);
   border: 1px solid var(--accent2);
-  border-radius: 0.4em;
-  padding: 0.23em 1.1em;
+  border-radius: 0.5em;
+  padding: 0.3em 1.2em;
   font-size: 1rem;
   margin-left: 0.5em;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: all 0.3s ease;
+  transform: scale(1);
   outline: none;
 }
 .language-toggle button.active,
 .language-toggle button:focus {
   background: var(--accent2);
   color: #fff;
+}
+.language-toggle button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .tabs {
   margin-top: 1.3em;
@@ -69,44 +75,52 @@ header p {
   background: var(--tab-bg);
   color: var(--accent);
   border: none;
-  padding: 0.7em 2em;
-  border-radius: 1.3em 1.3em 0 0;
+  padding: 0.8em 2.5em;
+  border-radius: 1.5em 1.5em 0 0;
   font-size: 1.1em;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.3s ease;
+}
+.tab-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
 }
 .tab-btn.active {
   background: var(--tab-active);
   color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 main {
   max-width: 950px;
-  margin: 2rem auto 2rem auto;
+  margin: 2rem auto;
   padding: 0 1rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
 }
 .calculator {
   background: var(--panel);
-  border-radius: 1.2rem;
-  box-shadow: 0 2px 12px #1119;
-  padding: 1.4rem 1.2rem;
+  border-radius: 1.5rem;
+  padding: 1.8rem;
   min-width: 300px;
   flex: 1 1 350px;
   max-width: 400px;
-  transition: box-shadow 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .calculator:hover {
-  box-shadow: 0 4px 20px #000b;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 .calculator h2 {
   margin-top: 0;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   color: var(--accent);
-  margin-bottom: 1.1rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
 }
 .inputs {
   display: flex;
@@ -122,14 +136,20 @@ main {
 }
 .inputs input, .inputs select {
   border: 1px solid var(--input-border);
-  border-radius: 0.4rem;
-  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
   font-size: 1rem;
   margin-left: 0.5rem;
   background: var(--input-bg);
   color: var(--text);
   width: 8em;
   box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+.inputs input:focus, .inputs select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 5px var(--accent2);
+  outline: none;
 }
 button {
   background: var(--accent2);
@@ -149,11 +169,18 @@ button:hover {
   font-size: 1.08rem;
   background: var(--result-bg);
   color: var(--accent);
-  border-radius: 0.5rem;
-  padding: 0.7rem;
+  border-radius: 0.6rem;
+  padding: 1rem;
   min-height: 1.4em;
   margin-top: 0.3rem;
   word-break: break-all;
+  transition: opacity 0.3s ease;
+}
+.result:empty {
+  opacity: 0;
+}
+.result:not(:empty) {
+  opacity: 1;
 }
 .audio-formats {
   max-width: 800px;
@@ -166,19 +193,20 @@ button:hover {
   border-collapse: collapse;
   background: var(--code-bg);
   color: var(--text);
-  border-radius: 0.7em;
+  border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 0 1px 3px #0003;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 .formats-table th, .formats-table td {
   border: 1px solid #333a;
-  padding: 0.7em 0.5em;
+  padding: 0.8rem;
   text-align: left;
 }
 .formats-table th {
   background: var(--accent2);
   color: #fff;
   font-weight: 700;
+  font-size: 1.1rem;
 }
 .formats-table tr:nth-child(even) {
   background: #1c2230;
@@ -186,8 +214,13 @@ button:hover {
 .formats-table tr:nth-child(odd) {
   background: #1e2533;
 }
-.formats-table td {
-  font-size: 0.99em;
+.formats-table tr:hover {
+  background: #2a3242;
+  transition: background 0.2s;
+}
+.formats-table td:first-child::before {
+  content: "🎵";
+  margin-right: 0.5rem;
 }
 #formats_intro, #formats_footer {
   margin-bottom: 1.1em;
@@ -211,13 +244,19 @@ footer a:hover {
 }
 @media (max-width: 950px) {
   main {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
+    padding: 0 0.5rem;
+    gap: 1rem;
   }
   .calculator {
-    max-width: 98vw;
+    width: 100%;
+    max-width: 100%;
     min-width: 0;
-    width: 98vw;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  .language-toggle {
+    top: 0.5rem;
+    right: 1rem;
   }
 }

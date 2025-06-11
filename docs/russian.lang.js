@@ -38,7 +38,7 @@ window.RU_LANG = {
   div_r1_label: "R1 (Ом):",
   div_r2_label: "R2 (Ом):",
   div_btn: "Вычислить",
-  // Results & messages (used in script.js for Russian)
+  // Results & messages
   ohm_need: "Введите любые два значения.",
   ohm_r: "Сопротивление R = {0} Ом",
   ohm_i: "Ток I = {0} А",
@@ -55,7 +55,8 @@ window.RU_LANG = {
   xo_lp1: "НЧ RC: C = {0} мкФ",
   xo_hp1: "ВЧ RL: L = {0} мГн",
   xo_2nd: "2-й порядок:<br>C = {0} мкФ<br>L = {1} мГн",
-  xo_adv: "Порядок {0}: Используйте активные или сложные пассивные схемы.<br><a href=\"https://www.diyaudioandvideo.com/Calculator/SpeakerCrossover/\" target=\"_blank\">См. расширенный калькулятор</a>",
+  xo_3rd: "3-й порядок:<br>C1 = {0} мкФ<br>L = {1} мГн<br>C2 = {2} мкФ",
+  xo_4th: "4-й порядок:<br>C1 = {0} мкФ<br>L1 = {1} мГн<br>C2 = {2} мкФ<br>L2 = {3} мГн",
   div_need: "Введите Vin, R1, R2.",
   div_result: "Vвыход = {0} В",
   // Audio Formats tab
@@ -63,6 +64,7 @@ window.RU_LANG = {
   formats_intro: "Здесь приведены наиболее распространённые аудиоформаты, их примерный размер и категория.",
   fmt_name: "Формат",
   fmt_type: "Тип",
+  fmt_pcm: "PCM/Non-PCM",
   fmt_subcat: "Подкатегория",
   fmt_size: "Примерный размер (1 минута, стерео)",
   fmt_note: "Описание",
@@ -74,6 +76,8 @@ window.RU_LANG = {
   fmt_lossless2: "Без потерь",
   fmt_lossless3: "Без потерь",
   fmt_lossless4: "Без потерь",
+  fmt_lossless5: "Без потерь",
+  fmt_lossless6: "Без потерь",
   fmt_mp3note: "Самый популярный для музыки и стриминга",
   fmt_aacnote: "По умолчанию для iTunes, YouTube, Apple Music",
   fmt_oggvorbisnote: "Открытый, бесплатный, используется в играх/Spotify",
@@ -82,5 +86,7 @@ window.RU_LANG = {
   fmt_alacnote: "Apple lossless, для iTunes и Apple устройств",
   fmt_opusnote: "Современный, низкая задержка (VoIP, Discord, стриминг)",
   fmt_aiffnote: "Apple несжатый, профи аудио",
-  formats_footer: "<strong>Совет:</strong> Форматы с потерями намного меньше, но теряют качество. Форматы без потерь сохраняют оригинальные данные, но занимают больше места."
+  fmt_dsdnote: "Аудио высокого разрешения, SACD, нишевое",
+  fmt_dsfnote: "DSD в формате файла, для аудио высокого класса",
+  formats_footer: "<strong>Совет:</strong> Форматы с потерями (Lossy) меньше, но теряют качество. Форматы без потерь (Lossless) сохраняют данные. PCM — стандартное кодирование, Non-PCM (DSD/DSF) используется для высококачественного аудио."
 };

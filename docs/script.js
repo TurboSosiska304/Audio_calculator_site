@@ -58,6 +58,7 @@ function setLang(lang) {
     document.getElementById("formats_intro").innerText = RU.formats_intro;
     document.getElementById("fmt_name").innerText = RU.fmt_name;
     document.getElementById("fmt_type").innerText = RU.fmt_type;
+    document.getElementById("fmt_pcm").innerText = RU.fmt_pcm;
     document.getElementById("fmt_subcat").innerText = RU.fmt_subcat;
     document.getElementById("fmt_size").innerText = RU.fmt_size;
     document.getElementById("fmt_note").innerText = RU.fmt_note;
@@ -70,6 +71,8 @@ function setLang(lang) {
     document.getElementById("fmt_lossless2").innerText = RU.fmt_lossless2;
     document.getElementById("fmt_lossless3").innerText = RU.fmt_lossless3;
     document.getElementById("fmt_lossless4").innerText = RU.fmt_lossless4;
+    document.getElementById("fmt_lossless5").innerText = RU.fmt_lossless5;
+    document.getElementById("fmt_lossless6").innerText = RU.fmt_lossless6;
     document.getElementById("fmt_mp3note").innerText = RU.fmt_mp3note;
     document.getElementById("fmt_aacnote").innerText = RU.fmt_aacnote;
     document.getElementById("fmt_oggvorbisnote").innerText = RU.fmt_oggvorbisnote;
@@ -78,9 +81,10 @@ function setLang(lang) {
     document.getElementById("fmt_alacnote").innerText = RU.fmt_alacnote;
     document.getElementById("fmt_opusnote").innerText = RU.fmt_opusnote;
     document.getElementById("fmt_aiffnote").innerText = RU.fmt_aiffnote;
+    document.getElementById("fmt_dsdnote").innerText = RU.fmt_dsdnote;
+    document.getElementById("fmt_dsfnote").innerText = RU.fmt_dsfnote;
     document.getElementById("formats_footer").innerHTML = RU.formats_footer;
   } else {
-    // Reset to English (reload to default content)
     location.reload();
   }
 }
@@ -97,8 +101,6 @@ function showTab(tab) {
 function fmt(str, ...args) {
   return str.replace(/\{(\d+)\}/g, (_, i) => args[i] !== undefined ? args[i] : "");
 }
-
-// --- Calculators code unchanged below (same as previous) ---
 
 // Ohm's Law Calculator
 function calcOhm() {
@@ -197,22 +199,46 @@ function calcXO() {
   let f = parseFloat(document.getElementById('xo_freq').value);
   let z = parseFloat(document.getElementById('xo_z').value);
   let lang = currentLang;
+
   if (isNaN(order) || isNaN(f) || isNaN(z) || f <= 0 || z <= 0) {
     document.getElementById('xo_result').innerText = lang === 'ru' ? RU_LANG.xo_need : 'Enter all values.';
     return;
   }
+
   let result = '';
+  let svg = '';
+
   if (order === 1) {
     if (type === 'lowpass') {
       let C = 1 / (2 * Math.PI * f * z);
       result = lang === 'ru'
         ? fmt(RU_LANG.xo_lp1, (C * 1e6).toFixed(2))
         : `Low-pass RC: C = ${(C * 1e6).toFixed(2)} μF`;
+      svg = `
+        <svg width="200" height="100" viewBox="0 0 200 100">
+          <line x1="10" y1="50" x2="60" y2="50" stroke="#fff" stroke-width="2"/>
+          <rect x="60" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+          <text x="80" y="50" fill="#fff" text-anchor="middle">C</text>
+          <line x1="100" y1="50" x2="150" y2="50" stroke="#fff" stroke-width="2"/>
+          <line x1="150" y1="30" x2="150" y2="70" stroke="#fff" stroke-width="2"/>
+          <text x="10" y="30" fill="#fff">In</text>
+          <text x="180" y="30" fill="#fff">Out</text>
+        </svg>`;
     } else {
       let L = z / (2 * Math.PI * f);
       result = lang === 'ru'
         ? fmt(RU_LANG.xo_hp1, (L * 1e3).toFixed(2))
         : `High-pass RL: L = ${(L * 1e3).toFixed(2)} mH`;
+      svg = `
+        <svg width="200" height="100" viewBox="0 0 200 100">
+          <line x1="10" y1="50" x2="60" y2="50" stroke="#fff" stroke-width="2"/>
+          <path d="M60,50 C70,30 80,70 90,50 C100,30 110,70 120,50" stroke="#fff" stroke-width="2" fill="none"/>
+          <text x="90" y="30" fill="#fff" text-anchor="middle">L</text>
+          <line x1="120" y1="50" x2="150" y2="50" stroke="#fff" stroke-width="2"/>
+          <line x1="150" y1="30" x2="150" y2="70" stroke="#fff" stroke-width="2"/>
+          <text x="10" y="30" fill="#fff">In</text>
+          <text x="180" y="30" fill="#fff">Out</text>
+        </svg>`;
     }
   } else if (order === 2) {
     let C = 1 / (2 * Math.PI * f * z);
@@ -220,13 +246,107 @@ function calcXO() {
     result = lang === 'ru'
       ? fmt(RU_LANG.xo_2nd, (C * 1e6).toFixed(2), (L * 1e3).toFixed(2))
       : `2nd order:<br>C = ${(C * 1e6).toFixed(2)} μF<br>L = ${(L * 1e3).toFixed(2)} mH`;
-  } else if (order === 3 || order === 4) {
+    svg = type === 'lowpass' ? `
+      <svg width="250" height="100" viewBox="0 0 250 100">
+        <line x1="10" y1="50" x2="60" y2="50" stroke="#fff" stroke-width="2"/>
+        <rect x="60" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="80" y="50" fill="#fff" text-anchor="middle">C</text>
+        <line x1="100" y1="50" x2="150" y2="50" stroke="#fff" stroke-width="2"/>
+        <path d="M150,50 C160,30 170,70 180,50 C190,30 200,70 210,50" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="180" y="30" fill="#fff" text-anchor="middle">L</text>
+        <line x1="210" y1="50" x2="240" y2="50" stroke="#fff" stroke-width="2"/>
+        <text x="10" y="30" fill="#fff">In</text>
+        <text x="240" y="30" fill="#fff">Out</text>
+      </svg>` : `
+      <svg width="250" height="100" viewBox="0 0 250 100">
+        <line x1="10" y1="50" x2="60" y2="50" stroke="#fff" stroke-width="2"/>
+        <path d="M60,50 C70,30 80,70 90,50 C100,30 110,70 120,50" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="90" y="30" fill="#fff" text-anchor="middle">L</text>
+        <line x1="120" y1="50" x2="170" y2="50" stroke="#fff" stroke-width="2"/>
+        <rect x="170" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="190" y="50" fill="#fff" text-anchor="middle">C</text>
+        <line x1="210" y1="50" x2="240" y2="50" stroke="#fff" stroke-width="2"/>
+        <text x="10" y="30" fill="#fff">In</text>
+        <text x="240" y="30" fill="#fff">Out</text>
+      </svg>`;
+  } else if (order === 3) {
+    let C1 = 1 / (2 * Math.PI * f * z * 0.707);
+    let L = z / (2 * Math.PI * f * 0.707);
+    let C2 = 1 / (2 * Math.PI * f * z);
     result = lang === 'ru'
-      ? fmt(RU_LANG.xo_adv, order)
-      : `Order ${order}: Use active or complex passive circuits.<br>
-    <a href="https://www.diyaudioandvideo.com/Calculator/SpeakerCrossover/" target="_blank">See advanced calculator</a>`;
+      ? fmt(RU_LANG.xo_3rd, (C1 * 1e6).toFixed(2), (L * 1e3).toFixed(2), (C2 * 1e6).toFixed(2))
+      : `3rd order:<br>C1 = ${(C1 * 1e6).toFixed(2)} μF<br>L = ${(L * 1e3).toFixed(2)} mH<br>C2 = ${(C2 * 1e6).toFixed(2)} μF`;
+    svg = type === 'lowpass' ? `
+      <svg width="300" height="100" viewBox="0 0 300 100">
+        <line x1="10" y1="50" x2="60" y2="50" stroke="#fff" stroke-width="2"/>
+        <rect x="60" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="80" y="50" fill="#fff" text-anchor="middle">C1</text>
+        <line x1="100" y1="50" x2="150" y2="50" stroke="#fff" stroke-width="2"/>
+        <path d="M150,50 C160,30 170,70 180,50 C190,30 200,70 210,50" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="180" y="30" fill="#fff" text-anchor="middle">L</text>
+        <line x1="210" y1="50" x2="260" y2="50" stroke="#fff" stroke-width="2"/>
+        <rect x="260" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="280" y="50" fill="#fff" text-anchor="middle">C2</text>
+        <text x="10" y="30" fill="#fff">In</text>
+        <text x="290" y="30" fill="#fff">Out</text>
+      </svg>` : `
+      <svg width="300" height="100" viewBox="0 0 300 100">
+        <line x1="10" y1="50" x2="60" y2="50" stroke="#fff" stroke-width="2"/>
+        <path d="M60,50 C70,30 80,70 90,50 C100,30 110,70 120,50" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="90" y="30" fill="#fff" text-anchor="middle">L1</text>
+        <line x1="120" y1="50" x2="170" y2="50" stroke="#fff" stroke-width="2"/>
+        <rect x="170" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="190" y="50" fill="#fff" text-anchor="middle">C</text>
+        <line x1="210" y1="50" x2="260" y2="50" stroke="#fff" stroke-width="2"/>
+        <path d="M260,50 C270,30 280,70 290,50 C300,30 310,70 320,50" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="290" y="30" fill="#fff" text-anchor="middle">L2</text>
+        <text x="10" y="30" fill="#fff">In</text>
+        <text x="290" y="30" fill="#fff">Out</text>
+      </svg>`;
+  } else if (order === 4) {
+    let C1 = 1 / (2 * Math.PI * f * z * 0.5);
+    let L1 = z / (2 * Math.PI * f * 0.5);
+    let C2 = 1 / (2 * Math.PI * f * z * 0.707);
+    let L2 = z / (2 * Math.PI * f * 0.707);
+    result = lang === 'ru'
+      ? fmt(RU_LANG.xo_4th, (C1 * 1e6).toFixed(2), (L1 * 1e3).toFixed(2), (C2 * 1e6).toFixed(2), (L2 * 1e3).toFixed(2))
+      : `4th order:<br>C1 = ${(C1 * 1e6).toFixed(2)} μF<br>L1 = ${(L1 * 1e3).toFixed(2)} mH<br>C2 = ${(C2 * 1e6).toFixed(2)} μF<br>L2 = ${(L2 * 1e3).toFixed(2)} mH`;
+    svg = type === 'lowpass' ? `
+      <svg width="350" height="100" viewBox="0 0 350 100">
+        <line x1="10" y1="50" x2="60" y2="50" stroke="#fff" stroke-width="2"/>
+        <rect x="60" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="80" y="50" fill="#fff" text-anchor="middle">C1</text>
+        <line x1="100" y1="50" x2="150" y2="50" stroke="#fff" stroke-width="2"/>
+        <path d="M150,50 C160,30 170,70 180,50 C190,30 200,70 210,50" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="180" y="30" fill="#fff" text-anchor="middle">L1</text>
+        <line x1="210" y1="50" x2="260" y2="50" stroke="#fff" stroke-width="2"/>
+        <rect x="260" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="280" y="50" fill="#fff" text-anchor="middle">C2</text>
+        <line x1="300" y1="50" x2="350" y2="50" stroke="#fff" stroke-width="2"/>
+        <path d="M350,50 C360,30 370,70 380,50 C390,30 400,70 410,50" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="380" y="30" fill="#fff" text-anchor="middle">L2</text>
+        <text x="10" y="30" fill="#fff">In</text>
+        <text x="340" y="30" fill="#fff">Out</text>
+      </svg>` : `
+      <svg width="350" height="100" viewBox="0 0 350 100">
+        <line x1="10" y1="50" x2="60" y2="50" stroke="#fff" stroke-width="2"/>
+        <path d="M60,50 C70,30 80,70 90,50 C100,30 110,70 120,50" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="90" y="30" fill="#fff" text-anchor="middle">L1</text>
+        <line x1="120" y1="50" x2="170" y2="50" stroke="#fff" stroke-width="2"/>
+        <rect x="170" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="190" y="50" fill="#fff" text-anchor="middle">C1</text>
+        <line x1="210" y1="50" x2="260" y2="50" stroke="#fff" stroke-width="2"/>
+        <path d="M260,50 C270,30 280,70 290,50 C300,30 310,70 320,50" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="290" y="30" fill="#fff" text-anchor="middle">L2</text>
+        <line x1="320" y1="50" x2="350" y2="50" stroke="#fff" stroke-width="2"/>
+        <rect x="350" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="370" y="50" fill="#fff" text-anchor="middle">C2</text>
+        <text x="10" y="30" fill="#fff">In</text>
+        <text x="340" y="30" fill="#fff">Out</text>
+      </svg>`;
   }
-  document.getElementById('xo_result').innerHTML = result;
+
+  document.getElementById('xo_result').innerHTML = result + '<br>' + svg;
 }
 
 // Voltage Divider Calculator
